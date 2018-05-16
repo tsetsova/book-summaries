@@ -13,17 +13,19 @@ This number should be viewed as both a minimum and maximum availability target. 
 Therefore managing risk is costly. It can reduce innovation and add unnecessary operational costs. Furthermore, the cost does not increase linearly as reliability increases. 
 
 # Work with product development
-There is a inherent tension between product development goals and SRE goals. 
+There is an inherent tension between product development goals and SRE goals. 
 
-Product development performance is measured on speed of delivery, while SRE performance is based on the reliability of the service, which creates an incentive to push back against high rates of change. 
+Product development performance is measured on speed of delivery, while SRE performance is based on the reliability of the service. 
 
-These tensions are clear in the way engineering practices are approached when it comes to
+This creates an incentive to push back against high rates of change. 
+
+These tensions are clear in the way engineering practices are approached when it comes to:
 * software fault tolerance
 * testing
 * push frequency
 * canary duration and size
 
-Decisions on these practices should be reached based on data and business needs, rather than politics, fear or hope. 
+Decisions on these practices should be reached based on **data** and **business needs**, rather than politics, fear or hope. 
 
 Both parties need to agree on an objective metric that can guide the negotiations in a meaningful and reproducible way. 
 
@@ -36,12 +38,14 @@ In order to identify the risk tolerance of your consumer services consider the f
 * cost
 * other service metrics
 
-Once appropriate metrics have been identified and agreed upon, consider using an **error budgets**. The main benefit of an error budget is that it provides both product development and SREs with a common incentive to find a balance between innovation and reliability.
+Once appropriate metrics have been identified and agreed upon, consider using an **error budgets**. 
+
+The main benefit of an error budget is that it provides both product development and SREs with a common incentive to find a balance between innovation and reliability.
 
 For example:
 A service needs to have 99% availability. Therefore the error budget allows for 1% downtime.
 
-While the system meets this objective, product development can take more risks. However, as the budget is being drained, product development themselves will add more tests or slow down their velocity to ensure they don't exceed the budget. If the budget is ever exceeded, releases are temporarily halted while additional resources are invested in resilience and performance. 
+While the system meets this objective, product development can take more risks. However, as the budget is being drained, product developers themselves will add more tests or slow down their velocity to ensure they don't exceed the budget. If the budget is ever exceeded, releases are temporarily halted while additional resources are invested in resilience and performance. 
 
-In this way the error budget helos manage risk with cost.
+In this way the error budget helps balance risk with cost.
 

@@ -12,7 +12,7 @@ This number should be viewed as both a minimum and maximum availability target. 
 
 Therefore managing risk is costly. It can reduce innovation and add unnecessary operational costs. Furthermore, the cost does not increase linearly as reliability increases. 
 
-# Work with product development
+## Work with product development
 There is an inherent tension between product development goals and SRE goals. 
 
 Product development performance is measured on speed of delivery, while SRE performance is based on the reliability of the service. 
@@ -48,4 +48,35 @@ A service needs to have 99% availability. Therefore the error budget allows for 
 While the system meets this objective, product development can take more risks. However, as the budget is being drained, product developers themselves will add more tests or slow down their velocity to ensure they don't exceed the budget. If the budget is ever exceeded, releases are temporarily halted while additional resources are invested in resilience and performance. 
 
 In this way the error budget helps balance risk with cost.
+
+### Monitor
+
+Monitoring is one of the main ways we can track the system's health and availability. 
+
+> Monitoring should never require a human to interpret any part of the alerting domain. Instead, software should do the interpreting, and humans should be notified only when they need to take action.
+
+
+There are three kinds of monitoring:
+* alerts - where a human needs to take action immedietly 
+* tickets - where a human needs to take action but not immedietly
+* logging - useful for diagnostic and forensic purposes
+
+## Be prepared
+
+The effectiveness of the emergency response is based on how quickly the system can be brought back to health - i.e. mean time to repair or MTTR. Reliability then can be calculated as a ration between mean time to failure and mean time to repair. 
+
+In order to increase reliability, it's best to have a playbook to guide the on-call engineer with the debugging process since human intervention adds latency.
+
+> While no playbook, no matter how comprehensive it may be, is a substitute for smart engineers able to think on the fly, clear and thorough troubleshooting steps and tips are valuable when responding to a high-stakes or time-sensitive page. Thus, Google SRE relies on on-call playbooks, in addition to exercises such as the “Wheel of Misfortune,”2 to prepare engineers to react to on-call events.
+
+As the majority of outages are due to changes to the live system, outages can be avoided or reduced in duration by:
+* Implementing progressive rollouts
+* Quickly and accurately detecting problems
+* Rolling back changes safely when problems arise
+
+These practices combined with capacity planing and regular load testing will ensure higher reliability. 
+
+
+
+
 

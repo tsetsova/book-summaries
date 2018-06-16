@@ -2,6 +2,10 @@
 
 ## What is Puppet
 
+From [the Learn Puppet VM](https://learn.puppet.com/)
+> When we talk about Puppet, we're often using the name as a shorthand for a collection of tools and services that work in concert to help you define how you want the systems in your infrastructure configured, and then automate the process of bringing those systems into your desired state and keeping them there. 
+
+From the introduction to *Learning Puppet 4*
 > Puppet manages configuration data, including users, packages, processes, and services—in other words, any resource of the node you can define.
 
 Puppet is *declarative* - you declare the final state of your systems and their configuration. Unlike *imperitive* tools, you don't have to worry about:

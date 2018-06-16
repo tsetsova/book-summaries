@@ -7,14 +7,16 @@
 Puppet is *declarative* - you declare the final state of your systems and their configuration. Unlike *imperitive* tools, you don't have to worry about:
 * the current state of your servers
 * adjust for each platform
-* the effects of running your code several times in a roll
+* the effects of running your code several times in a roll (due to *idempotence*)
 
-> Declarative language is much easier to read, and less prone to breakage due to environment differences. Puppet was designed to achieve consistent and repeatable results. Every time Puppet evaluates the state of the node, it will bring the node to a state consistent with the specification.
+This way Puppet code is flexible, easy to read, less prone to breakage due to environment differences, and it achieves consistent, repeatable results. 
 
 Puppet customizes the policy for each node based on stats, called *facts*, such as hostname, OS, memory, etc. Each node is evaluated and updated indepedently without waiting for any other node. 
 ![An illustration of how the Puppet master manages Puppet agents ](https://docs.google.com/drawings/d/e/2PACX-1vTFzwbRYBFchsTgTuXFR5rr73AbtW20FwrXyQPkzA0lJzqmA0pFNCbQKzaT37PYjXYIkokA2ct_TkgW/pub?w=960&h=720)
-
 ## Glossary
+
+#### Idempotence:
+In mathematics and computer science, idempotent operations are those that can be applied multiple times without changing the result beyond the initial application.
 
 #### Node:
 A node is a device managed by Puppet. 

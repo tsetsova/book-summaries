@@ -38,4 +38,4 @@ A catalog describes the desired state of each managed resource on a node. It is 
 Catalogs are compiled by a Puppet master from manifests and agent-provided data (such as facts, certificates, etc), as well as optional external data (such as data from an external node classifier, exported resources, and functions). 
 The master then serves the compiled catalog to the agent when requested.
 
-These definitions and more can be found in [Puppet's offical glossary] (https://docs.puppet.com/references/glossary.html)
+These definitions and more can be found in [Puppet's offical glossary](https://docs.puppet.com/references/glossary.html)

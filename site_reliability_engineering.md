@@ -108,6 +108,7 @@ These practices combined with capacity planing and regular load testing will ens
 
 ## Be selective
 
+### Metrics
 > You shouldn’t use every metric you can track in your monitoring system as an SLI; an understanding of what your users want from the system will inform the judicious selection of a few indicators. Choosing too many indicators makes it hard to pay the right level of attention to the indicators that matter, while choosing too few may leave significant behaviors of your system unexamined. 
 
 Different systems have specific requirements:
@@ -117,6 +118,31 @@ Different systems have specific requirements:
 * Big data systems: throughput and end-to-end latency
 
 > All systems should care about correctness: was the right answer returned, the right data retrieved, the right analysis done? Correctness is important to track as an indicator of system health, even though it’s often a property of the data in the system rather than the infrastructure per se, and so usually not an SRE responsibility to meet.
+
+### Automation - software to act on software
+
+> “If we are engineering processes and solutions that are not automatable, we continue having to staff humans to maintain the system. If we have to staff humans to do the work, we are feeding the machines with the blood, sweat, and tears of human beings. Think The Matrix with less special effects and more pissed off System Administrators.” by Joseph Bironas, a Google SRE
+
+Choose what to automate carefully. Automation is a *force multiplier*, not a panacea. The benefits of automation are clear:
+
+* Consistency
+* Faster repair and action
+
+Automation allows you to create a platform. 
+
+> In general, we have chosen to create platforms where we could, or to position ourselves so that we could create platforms over time. We view this platform-based approach as necessary for manageability and scalability.
+
+Platforms can be extended, applied to more systems, measured and monitored accurately. Additionally once a task has been automated it can be performed by anyone, including the service itself! 
+
+Additionally, because platforms *centralise mistakes*, you only have to fix them in a single place. This reduces MTTR, frees developer time for innovation, and even reduces the overall costs of the system (given its sufficiently large).
+
+Common path automation has followed at Google:
+1. Operator-triggered manual action (no automation)
+2. Operator-written, system-specific automation
+3. Externally maintained generic automation
+4. Internally maintained, system-specific automation
+5. Autonomous systems that need no human intervention
+
 
 
 

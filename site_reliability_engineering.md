@@ -108,6 +108,17 @@ These practices combined with capacity planing and regular load testing will ens
 
 ## Be selective
 
+### Features
+Software simplicity is a prerequisite to reliability. A complex system is difficult to debug and reason about. It slows innovation and makes it difficult to discern it's purpose and how to best support it. Sometimes systems are solving a difficult problem and become complex naturally - this is referred to as 'essential complexity'. What we want to avoid is unnecessary complexity introduced by accident, aka 'accidental complexity'. 
+
+> Unlike just about everything else in life, “boring” is actually a positive attribute when it comes to software! We don’t want our programs to be spontaneous and interesting; we want them to stick to the script and predictably accomplish their business goals. In the words of Google engineer Robert Muth, “Unlike a detective story, the lack of excitement, suspense, and puzzles is actually a desirable property of source code.” Surprises in production are the nemeses of SRE.
+
+* Modularity: looser coupling enables developers to make changes and improvements indepedently from the rest of the system
+
+* Minimal APIs: the smaller the interface that is provided, the easier it will be to understand, support and maintain an API; this should apply both to the way it is written but also how changes to it are rolled out
+
+> As a system grows more complex, the separation of responsibility between APIs and between binaries becomes increasingly important. This is a direct analogy to object-oriented class design: just as it is understood that it is poor practice to write a “grab bag” class that contains unrelated functions, it is also poor practice to create and put into production a “util” or “misc” binary. A well-designed distributed system consists of collaborators, each of which has a clear and well-scoped purpose.
+
 ### Metrics
 > You shouldn’t use every metric you can track in your monitoring system as an SLI; an understanding of what your users want from the system will inform the judicious selection of a few indicators. Choosing too many indicators makes it hard to pay the right level of attention to the indicators that matter, while choosing too few may leave significant behaviors of your system unexamined. 
 

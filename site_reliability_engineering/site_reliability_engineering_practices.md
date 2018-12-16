@@ -4,7 +4,7 @@
 
 > We can characterize the health of a service—in much the same way that Abraham Maslow categorized human needs [Mas43]—from the most basic requirements needed for a system to function as a service at all to the higher levels of function—permitting self-actualization and taking active control of the direction of the service rather than reactively fighting fires.
 
-![Basic requirements of a system based on Maslow's pyramid of needs](/site_reliability_engineering/srle_01.png.png)
+![Basic requirements of a system based on Maslow's pyramid of needs](srle_01.png)
 
 ### Monitoring
 

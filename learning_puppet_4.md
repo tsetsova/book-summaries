@@ -18,6 +18,18 @@ This way Puppet code is flexible, easy to read, less prone to breakage due to en
 Puppet customizes the policy for each node based on stats, called *facts*, such as hostname, OS, memory, etc. Each node is evaluated and updated indepedently without waiting for any other node. 
 ![An illustration of how the Puppet master manages Puppet agents ](https://docs.google.com/drawings/d/e/2PACX-1vTFzwbRYBFchsTgTuXFR5rr73AbtW20FwrXyQPkzA0lJzqmA0pFNCbQKzaT37PYjXYIkokA2ct_TkgW/pub?w=960&h=720)
 
+Puppet isn't one application. It's an ecosystem, containing many tightly related and dependent packages, called a Puppet Collection. Puppet, Facter, MCollective, and the Ruby interpreter are all tightly related dependencies. The Puppet agent, Puppet server, and PuppetDB are self-standing but interdependent applications.
+
+In order to increase stablity of the ecosystem:
+* **Puppet and all core dependencies are shipped together in a single package**
+* **Components of the Puppet ecosystem will be tested and shipped together**
+
+### Facter
+A program which collects _facts_ about a node - details such as IP address, hostname, OS etc, need for the compilation of a custom manifest.
+
+### Hiera
+Enables the use of variables in your manifests. You can specify a hierarchy for the variables, which allows you to overwrite them based on environment, os-version or some other logic.
+
 ## Best practices for writing Manifests:
 
 * Quote all unquoted string values.

@@ -17,6 +17,30 @@ This way Puppet code is flexible, easy to read, less prone to breakage due to en
 
 Puppet customizes the policy for each node based on stats, called *facts*, such as hostname, OS, memory, etc. Each node is evaluated and updated indepedently without waiting for any other node. 
 ![An illustration of how the Puppet master manages Puppet agents ](https://docs.google.com/drawings/d/e/2PACX-1vTFzwbRYBFchsTgTuXFR5rr73AbtW20FwrXyQPkzA0lJzqmA0pFNCbQKzaT37PYjXYIkokA2ct_TkgW/pub?w=960&h=720)
+## Updating from Puppet 3 to 4
+
+### Deprecated features, introductions and actions:
+
+* **Ruby DSL** - search for manifests that have the .rb extension and rewrite them in the Puppet configuration language
+* **Configuration File Environments** - replace with directory environments by moving module path settings from puppet.conf to an environment.conf file in each environment’s directory
+* **Node inheritance** - use external node classifiers instead
+* **Puppet Kick**
+* **Qualifying Relative Class Names** - replace relative type or class declarations with their fully qualified names: include mymodule::ntp:
+* **Search function** - remove it and replace with fully qualified name
+* **Import** - move the imported manifests into a Puppet module, and include the module class instead: include commonlib::functions; remove the irrelevant ignoreimport setting from your configuration files 
+* **Documenting Modules with Puppet Strings**  - The puppet doc command now only documents Puppet commands. Module documentation once provided by puppet doc has been replaced by puppetlabs-strings, which generates a complete documentation tree for the module in Markdown format.
+* **Tagmail Report Processor** - no longer inclulded by default, can be found 
+* **String interpretation** - quote all strings to avoid misinterpretation; quote strings that may be misinterpreted as numbers.
+* **Some PuppetDB queries** - ActiveRecord storeconfigs, inventory service, puppet facts upload command (which utilized the inventory service), puppet facts find --terminus rest command (which utilized the inventory service). Adjust manifests that need these features to use the PuppetDB API.
+* **File Mode is no longer numeric** - you must use a string value containing the octal number for file modes: mode => '0644'
+* **Qualifying Defined Types** - defined types created in modules need to be prefixed with the module name
+* **Assumed permissions** - Add specific owner, group, and mode attributes to all file resources.
+
+Introduced features:
+* **Boolean types** - Puppet 4 introduced the Boolean data type, which does not compare equally with a String value. Check each instance of true or false to determine if it should be tested as a string, or boolean. Empty strings evaluate to boolean true.  This can trip you up if you had code that depended on a false evaluation so replace "if ! $empty_string " with "if $empty_string == ''"
+* **Ammended Cron Purge** - Previous cron purge invocations would remove unmanaged cron entries from only the user that Puppet was running, this will now purge unknown cron entries for every user.
+* **Adjusting Networking Facts** - With the latest version of Facter, many of the network-related facts have been restructured into hashes that allow much more intelligent retrieval and analysis of interfaces.
+
 ## Glossary
 
 #### Idempotence:

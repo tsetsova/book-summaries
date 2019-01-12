@@ -17,6 +17,18 @@ This way Puppet code is flexible, easy to read, less prone to breakage due to en
 
 Puppet customizes the policy for each node based on stats, called *facts*, such as hostname, OS, memory, etc. Each node is evaluated and updated indepedently without waiting for any other node. 
 ![An illustration of how the Puppet master manages Puppet agents ](https://docs.google.com/drawings/d/e/2PACX-1vTFzwbRYBFchsTgTuXFR5rr73AbtW20FwrXyQPkzA0lJzqmA0pFNCbQKzaT37PYjXYIkokA2ct_TkgW/pub?w=960&h=720)
+
+## Best practices for writing Manifests:
+
+* Quote all unquoted string values.
+* _ensure_ should be the first attribute in a resource block.
+* Align the arrows for attributes within a resource block.
+* Enable the strict_variables configuration setting to catch errors while testing.
+* Group resources by their relationship with each other.
+* Don’t use conditionals within resource declarations.
+* Provide defaults for case and select statements.
+* When something can be done multiple ways, always use the most readable option.
+
 ## Updating from Puppet 3 to 4
 
 ### Deprecated features, introductions and actions:
@@ -40,6 +52,17 @@ Introduced features:
 * **Boolean types** - Puppet 4 introduced the Boolean data type, which does not compare equally with a String value. Check each instance of true or false to determine if it should be tested as a string, or boolean. Empty strings evaluate to boolean true.  This can trip you up if you had code that depended on a false evaluation so replace "if ! $empty_string " with "if $empty_string == ''"
 * **Ammended Cron Purge** - Previous cron purge invocations would remove unmanaged cron entries from only the user that Puppet was running, this will now purge unknown cron entries for every user.
 * **Adjusting Networking Facts** - With the latest version of Facter, many of the network-related facts have been restructured into hashes that allow much more intelligent retrieval and analysis of interfaces.
+* **Calling Functions in Strings**  - You can now call functions from within a double-quoted string by wrapping them in curly braces exactly as if they were variables: "I need a cup of coffee. Remind me in ${fqdn_rand(10)} minutes."
+* **Matching String Regexps** - You can now interpolate a variable within a regex expression
+* **Letting Expressions Stand Alone**  - Previous versions of Puppet required the results of all expressions to be assigned. In Puppet 4, an expression can stand alone. If it is the last expression in a lambda or a function, the result will be returned. Otherwise, the value will be discarded.
+* **Using Hash and Array Literals** - Older versions of Puppet required you to assign arrays and hashes to variables before using them in resources or functions. Now you can concatenate arrays and merge hashes with + and append with <<.
+
+How to migrate:
+
+* Upgrade the Puppet client and master to Puppet 3.8.7.
+* Disable stringify_facts in the Puppet configuration.
+* Set parser = future in the Puppet configuration.
+
 
 ## Glossary
 

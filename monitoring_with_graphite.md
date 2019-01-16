@@ -27,17 +27,41 @@ You can use Graphite for all of these or combine tools together.
 
 Graphite is structured in a way that handles the above-mentioned tradeoffs. Caching is done with the help of carbon daemons, which write data to Whisper, a time-series database. These give Graphite the ability to store and retrieve time-series data quickly—and at high volume. 
 
-### Carbon
+Graphite consists of three parts:
+
+* the Carbon daemon
+* the Whisper database library
+* the Graphite web application
+
+### What is Carbon
 > A network service that listens for inbound metric submissions. It stores the metrics temporarily in a memory buffer-cache for a brief period before flushing them to disk in the form of the Whisper database format.
 
-Carbon consists of three parts:
+Theere are three types of Carbon daemons:
 
-#### Carbon relay
-#### Carbon cache
-#### Carbon aggregator
+> Carbon-cache performs the heavy lifting, buffering datapoints in memory and routinely flushing them to disk. carbon-relay adds flexibility in terms of metrics routing, load balancing, and replication. And finally, carbon-aggregator helps normalize our datapoints in a predictable manner.
 
-### Whisper
+#### Carbon-relay
+It's single listener that relays connections across a pool of cache instances. It has two main tasks: forwarding metrics to another Carbon daemon and replicating metrics to one or more destinations
+
+>By default, carbon-relay uses the consistent-hashing routing method. This method hashes the metric string to ensure that it picks the same destination among a ring of nodes, every time. Consistent hashing aims for an even distribution of your metrics across all nodes.
+
+#### Carbon-cache
+Not just an cache but a network service which:
+* accepts inbound metrics from clients
+* temporarily stores the metrics in memory (aka the “cache”)
+* can be queried for "hot metrics" which haven't been written yet
+* writes metrics to disk as Whisper database files
+
+#### Carbon-aggregator
+
+The Graphite API lets you calculate complex queries on the fly, but it comes with a performance cost. If you need to aggregate across hundreds if not thousands of servers, you can create rules that select a subset of metrics and aggregate them. 
+
+Carbon monitors the aggregation file, the blacklisting and whitelisting rules and will pick up any updates.
+
+### What is Whisper
 >The specification of the database file layout, including metadata and rollup archives, as well as the programming library that both Carbon and the Graphite web application use to interact with the respective database files.
+
+Whisper is a fixed-size database file format with support for datapoints down to one-second precision. Every datapoint in a Whisper file is stored as a big-endian double-precision float with an epoch timestamp. In layman’s terms, this just means Whisper stores each datapoint with enough decimal points to guarantee a high degree of accuracy.
 
 ## Graphite Features
 

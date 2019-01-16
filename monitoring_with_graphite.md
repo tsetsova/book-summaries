@@ -1,7 +1,7 @@
 
 **This is a summary for my own educational purposes only. Please buy the full book, because it's awesome!**
 
-# Monitoring with Graphite by Jason Dixon
+# A Summary of Monitoring with Graphite by Jason Dixon
 Published by O'Reilly Media, Inc., 2017 
 
 > Without real-time monitoring and a high-performance analytical data store, we lack the perspective to qualify our current, past, or future performance. Business decisions are increasingly data-driven, and Graphite provides all the tools to help users collect, store, retrieve, and analyze data quickly and effectively.

@@ -1,6 +1,3 @@
-
-**This is a summary for my own educational purposes only. Please buy the full book, because it's awesome!**
-
 # A Summary of Monitoring with Graphite by Jason Dixon
 Published by O'Reilly Media, Inc., 2017 
 

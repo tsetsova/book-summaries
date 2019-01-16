@@ -9,6 +9,20 @@ Published by O'Reilly Media, Inc., 2017
 
 Input and output (or I/O) are managed by the kernel (as well as filesystems).I/O is expensive especially if you’re trying to do a lot of one and **any of the other** at any point in time. A popular solution is buffering writes in memory with a cache (which requires a lot of memory). This has an additional benefit of providing "hot copies" of the data for queries(reads). This strategy only works, however, if you write routinely to disk in order to not lose the data, and expire frequently what's in the cache so users don't query stale data. 
 
+## Anatomy of a Monitoring System
+
+Monitoring systems are now more likely to be a combination of tools rather than one monolithic solution. 
+
+Some of the essential components are:
+
+* Aggregagator: normalising the metrics 
+* State Engine: used for tracking the state of metrics in relation to defined thresholds, send out alert as well as close alert incidents
+* Notification Router: used for sending notifications, escalating etc.
+* Storage Engine: used for the long-term storage and retrieval of metrics
+* Visualisation
+
+You can use Graphite for all of these or combine tools together.
+
 ## Graphite Architecture
 
 Graphite is structured in a way that handles the above-mentioned tradeoffs. Caching is done with the help of carbon daemons, which write data to Whisper, a time-series database. These give Graphite the ability to store and retrieve time-series data quickly—and at high volume. 
@@ -54,4 +68,4 @@ target=summarize(sumSeries(ec2.instances.*.killed), "1d")
 * Time-series database: a software system that’s optimized for the storage and retrieval of time-series data
 * Telemetry: the collection of measurements, typically of remote instruments, for the purposes of monitoring
 * Seasonality/ Periodicity: describe the characteristics of regular or predictable patterns that recur around the same time every hour/day/month/year
-* Resolution: the precision and interval for which the metric’s values are captured. For example, Carbon reports its own internal statistics at a resolution of one minute for up to one year aka enough datapointsat a 60-second interval to describe one year’s worth of data (not counting leap years). **We can always request lower precision values using summarize(), but we can never ask for higher precision values than our database was configured to support at that resolution.**
+* Resolution: the precision and interval for which the metric’s values are captured. For example, Carbon reports its own internal statistics at a resolution of one minute for up to one year aka enough datapointsat a 60-second interval to describe one year’s worth of data (not counting leap years). **It's possible to request lower precision values using summarize(), but not higher precision values**

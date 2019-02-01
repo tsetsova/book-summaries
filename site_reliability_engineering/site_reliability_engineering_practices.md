@@ -42,19 +42,27 @@ Monitoring is one of the main ways we can track the system's health and availabi
 
 > Without monitoring, you have no way to tell whether the service is even working; absent a thoughtfully designed monitoring infrastructure, you’re flying blind. Monitoring enables service owners to make rational decisions about the impact of changes to the service, apply the scientific method to incident response, and of course ensure their reason for existence: to measure the service’s alignment with business goals.
 
-### Types of monitoring:
+## Types of monitoring:
+
+There are two ways you can approach your monitoring, and both comlement each other, to build a clearer picture of the behaviour of your software in production:
+
+### White-box monitoring
+Think of your service as if it's in a transparent box, where you know the internals of your system. They are exposed, and inspectable from the oustide. This type of monitoring is great for indentifying which components are failing, where your bottlenecks are. However, it doesn't tell you what your users see and whether mission-critical functionality is being impacted or not. It also means that you have to predict the failure scenarios, in order to monitor and alert on them. 
+
+### Black-box monitoring
+Unlike with white-box monitoring, think of your service as if it's in an opaque box, where you have no idea how your system is set up on the inside. This type of monitoring works well for looking at your service's critical functionality but it lacks the granularity of white-box monitoring.
+
+## Alerting
 
 > Monitoring should never require a human to interpret any part of the alerting domain. Instead, software should do the interpreting, and humans should be notified only when they need to take action.
 
-There are three kinds of monitoring:
-* alerts - where a human needs to take action immedietly 
+Create alerts on the the the high-level service objectives, but make sure you still have **granular data** to debug and inspect any individual components. 
+
+There are three kinds of alerts:
+* pages - where a human needs to take action immedietly 
 * tickets - where a human needs to take action but not immedietly
 * logging - useful for diagnostic and forensic purposes
 
-Create alerts on the the the high-level service objectives, but make sure you still have **granular data** to debug and inspect any individual components. 
-
-* white-box monitoring
-* black-box monitoring
 
 
 ### Incident Response

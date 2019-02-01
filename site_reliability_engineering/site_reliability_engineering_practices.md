@@ -36,6 +36,10 @@ Use percentiles instead - differentiating between the 99th or 99.9th percentile 
 
 > We generally prefer to work with percentiles rather than the mean (arithmetic average) of a set of values.  Doing so makes it possible to consider the long tail of data points, which often have significantly different (and more interesting) characteristics than the average.  Because of the artificial nature of computing systems, data points are often skewed—for instance, no request can have a response in less than 0 ms, and a timeout at 1,000 ms means that there can be no successful responses with values greater than the timeout. As a result, we cannot assume that the mean and the median are the same—or even close to each other!
 
+#### Measure your toil
+
+> Ideally, symptoms of operational overload should be measurable, so that the goals can be quantified (e.g., number of daily tickets < 5, paging events per shift < 2).
+
 ### Monitoring
 
 Monitoring is one of the main ways we can track the system's health and availability. 
@@ -64,12 +68,38 @@ There are three kinds of alerts:
 * logging - useful for diagnostic and forensic purposes
 
 
+#### Pager fatigue
+Too many alerts will reduce on-call efficiency. If there's a lot of noisy alerts, engineers are likely to either ignore real issues or make the wrong assumptions about what's causing the outage.
+
+Make sure that you have a low signal-to-noise ratio. As well as removing false positives, double check if you can bring your alert/incident ratio closer to 1:1, to avoid on-call engineers receiving duplicate alerts for the same incident. If multiple related alerts need to be fired, then make sure that they are grouped together, to make traiging and debuging easier.
+
+
+#### A Treacherous Enemy: Operational Underload
+
+> Being on-call for a quiet system is blissful, but what happens if the system is too quiet or when SREs are not on-call often enough? An operational underload is undesirable for an SRE team. Being out of touch with production for long periods of time can lead to confidence issues, both in terms of overconfidence and underconfidence, while knowledge gaps are discovered only when an incident occurs.
+
 
 ### Incident Response
+
+#### On-call
+
+Have an agreed response-time between the engineers and the product owners. This response time should be based on the determined level of availability of your service aka page only when your SLOs are being threathened. At Google, highly-critical services might have a response time of 5 minutes, compared to internal facing ones, which would have a longer response time: for example 30 minutes. 
+
+Pages are expensive and affect people's work-life balance. Keep them to a minimum by investing in reliabtility. This is why SREs spend at least 50% of their time on active engineering work.
+
+Each page has operational overhead - "root-cause analysis, remediation, and follow-up activities like writing a postmortem and fixing bugs". These are important steps for identifying how to avoid an incident repeating again and again, draining resources and morale. But they also take time in order to be done right, and this means there's only so many pages you can handle as a team.
+
+In order to build a sense of safety for on-call engineers, make sure you have:
+
+* Clear escalation paths
+* Well-defined incident-management procedures
+* A blameless postmortem culture
 
 ### Postmortem and Root-Cause Analysis
 
 > We aim to be alerted on and manually solve only new and exciting problems presented by our service; it’s woefully boring to “fix” the same issue over and over. In fact, this mindset is one of the key differentiators between the SRE philosophy and some more traditional operations-focused environments. 
+
+> It’s important to evaluate what went wrong, recognize what went well, and take action to prevent the same errors from recurring in the future. SRE teams must write postmortemsafter significant incidents and detail a full timeline of the eventsthat occurred. By focusing on events rather than the people, these postmortems provide significant value. Rather than placing blame on individuals, they derive value from the systematic analysis of production incidents. Mistakes happen, and software should make sure that we make as few mistakes as possible. Recognizing automation opportunities is one of the best ways to prevent human errors 
 
 ### Testing
 
